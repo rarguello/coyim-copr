@@ -1,0 +1,9 @@
+[Desktop Entry] 
+Name=CoyIM
+Comment=A safe and secure chat client
+Exec=/usr/bin/coyim
+Icon=coyim
+Terminal=false
+Type=Application
+Encoding=UTF-8
+Categories=Network;Chat;
