@@ -2,7 +2,7 @@
 
 Name:           coyim
 Version:        0.3.11
-Release:        0.1
+Release:        0.2
 Summary:        A safe and secure chat client
 License:        GPLv3+
 URL:            https://coy.im
@@ -24,16 +24,12 @@ A safe an secure chat client.
 mkdir -p src/github.com/coyim
 ln -s ../../../ src/github.com/coyim/coyim
 
-# Use bundled source
-cp -pr vendor/* src/
-rm -rf vendor
-
 export GTK_VERSION=$(pkg-config --modversion gtk+-3.0 | tr . _ | cut -d '_' -f 1-2)
 export GTK_BUILD_TAG=gtk_${GTK_VERSION}
 ./gen_version_file.sh ignore v%{version}
 
 export GOPATH=$(pwd):%{gopath}
-go build -i -tags ${GTK_BUILD_TAG} -o bin/coyim
+go build -tags ${GTK_BUILD_TAG} -o bin/coyim github.com/coyim/coyim
 
 %install
 install -d %{buildroot}/%{_bindir}
@@ -54,5 +50,8 @@ desktop-file-install --dir=${RPM_BUILD_ROOT}%{_datadir}/applications %{SOURCE1}
 %{_datadir}/icons/hicolor/*
 
 %changelog
+* Tue Apr 30 2019 Ricardo Arguello <ricardo.arguello@gmail.com> - 0.3.11-0.2
+- Fix vendor directory management
+
 * Wed Apr 24 2019 Ricardo Arguello <ricardo.arguello@gmail.com> - 0.3.11-0.1
 - Initial release
